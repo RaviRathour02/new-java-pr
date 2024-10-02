@@ -5,6 +5,7 @@ env:
   CONTAINER_NAME: ravi-cont
   RESOURCE_GROUP: ravi-grp
   DEPLOYMENT_MANIFEST_PATH: deployment.yml
+  CLUSTER_NAME: ravi-cluster
   
   
   
