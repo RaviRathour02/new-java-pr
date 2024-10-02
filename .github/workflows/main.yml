@@ -1,0 +1,38 @@
+name: Deploy to Amazon ECS
+
+env:
+  AZURE_CONTAINER_REGISTRY: myrepo6473
+  CONTAINER_NAME: ravi-cont
+  RESOURCE_GROUP: ravi-grp
+  
+  
+  
+on:
+  push:
+    branches: [ "main" ]
+  
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Build project with Maven
+      run: mvn -B package --file pom.xml
+    
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Builds and pushes an image up to your Azure Container Registry
+      - name: Build and push image to ACR
+        run: |
+          az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
