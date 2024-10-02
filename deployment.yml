@@ -19,3 +19,5 @@ spec:
         image: myrepo6473.azurecr.io/ravi-cont:fa3deca6db6d87188f8e95c9c190395d1c8d6b5d
         ports:
         - containerPort: 8080
+      imagePullSecrets:
+      - name: acr-to-aks
