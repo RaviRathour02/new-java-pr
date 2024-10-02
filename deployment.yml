@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: my-container
-        image: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+        image: myrepo6473.azurecr.io/ravi-cont:fa3deca6db6d87188f8e95c9c190395d1c8d6b5d
         ports:
         - containerPort: 8080
